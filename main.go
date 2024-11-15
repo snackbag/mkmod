@@ -4,12 +4,21 @@ import (
 	"bufio"
 	"flag"
 	"fmt"
+	"golang.org/x/text/language"
 	"os"
 	"path/filepath"
+	"regexp"
+	"slices"
 	"strings"
+
+	"golang.org/x/text/cases"
 )
 
+var validPlatforms []string
+
 func main() {
+	validPlatforms = []string{"fabric"}
+	errors := make([]string, 0)
 
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
 	version := flag.String("version", "1.21.3", "the target minecraft version")
@@ -22,9 +31,36 @@ func main() {
 		return
 	}
 
+	if !slices.Contains(validPlatforms, *platform) {
+		errors = append(errors, "Invalid platform '"+*platform+"'")
+	}
+
 	id := flag.Args()[0]
 	packageName := flag.Args()[1]
-	mainName := flag.Args()[2]
+	mainName := cases.Title(language.English, cases.Compact).String(flag.Args()[2])
+
+	packageMatch := matchesRegex("^(?:\\w+|\\w+\\.\\w+)+$", packageName)
+	mainMatch := matchesRegex("^[a-zA-Z_$]+$", mainName)
+	idMatch := matchesRegex("^[a-z0-9_.-]+$", id)
+
+	if !packageMatch {
+		errors = append(errors, "Invalid package. Please follow Java's naming conventions.")
+	}
+
+	if !mainMatch {
+		errors = append(errors, "Invalid main class. Please follow Java's naming conventions.")
+	}
+
+	if !idMatch {
+		errors = append(errors, "Invalid mod id. May only consist of lowercase characters, numbers, underscore, dot or dash")
+	}
+
+	if len(errors) > 0 {
+		fmt.Println("\033[1mFailed to generate template due to the following errors:\033[0;31m")
+		fmt.Print("* " + strings.Join(errors, "\n* ") + "\n")
+		fmt.Println("\033[0m\nYou must resolve these issues before the template can be created")
+		return
+	}
 
 	ex, err := os.Executable()
 	if err != nil {
@@ -59,4 +95,13 @@ func main() {
 	}
 
 	fmt.Println("Please wait...")
+}
+
+func matchesRegex(regex string, input string) bool {
+	match, err := regexp.MatchString(regex, input)
+	if err != nil {
+		panic(err)
+	}
+
+	return match
 }
