@@ -7,13 +7,17 @@ import (
 	"strings"
 )
 
+type ModContext struct {
+	Platform    string
+	Name        string
+	Version     string
+	ID          string
+	PackageName string
+	MainClass   string
+}
+
 func Mkmod(
-	instructions []interface{},
-	name string,
-	version string,
-	id string,
-	packageName string,
-	mainClass string) {
+	instructions []interface{}, ctx ModContext) {
 
 	for _, element := range instructions {
 		element := element.(map[string]interface{})
@@ -21,7 +25,7 @@ func Mkmod(
 
 		switch command {
 		case "mkdir":
-			mkdir(element["name"].(string), name)
+			mkdir(element["name"].(string), ctx)
 			break
 		default:
 			fmt.Printf("\033[0;31mUnknown command: %s\033[0m\n", command)
@@ -30,8 +34,8 @@ func Mkmod(
 	}
 }
 
-func mkdir(dir string, name string) {
-	err := os.MkdirAll(path.Join(strings.Replace(name, "/", string(os.PathSeparator), -1), dir), 0755)
+func mkdir(dir string, ctx ModContext) {
+	err := os.MkdirAll(path.Join(strings.Replace(ctx.Name, "/", string(os.PathSeparator), -1), dir), 0755)
 	if err != nil {
 		panic(err)
 	}
