@@ -37,6 +37,7 @@ func Mkmod(
 func MkmodString(original string, ctx ModContext) string {
 	newVersion := strings.Replace(original, "%mkmod:platform%", ctx.Platform, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:name%", ctx.Name, -1)
+	newVersion = strings.Replace(newVersion, "%mkmod:version%", ctx.Version, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:id%", ctx.ID, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:package%", ctx.PackageName, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:package_dir%", strings.Replace(ctx.PackageName, ".", string(os.PathSeparator), -1), -1)
