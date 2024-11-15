@@ -1,8 +1,11 @@
 package main
 
 import (
+	"bufio"
 	"flag"
 	"fmt"
+	"os"
+	"strings"
 )
 
 func main() {
@@ -13,15 +16,38 @@ func main() {
 
 	flag.Parse()
 
+	if len(flag.Args()) != 3 {
+		fmt.Println("Invalid Syntax. Use mkmod -platform [platform] -version [mc version] -name [mod name] [mod id] [package] [main class]")
+		return
+	}
+
 	id := flag.Args()[0]
 	packageName := flag.Args()[1]
 	mainName := flag.Args()[2]
 
-	fmt.Println("platform:", *platform)
-	fmt.Println("version:", *version)
-	fmt.Println("name:", *name)
-	fmt.Println("id:", id)
-	fmt.Println("package:", packageName)
-	fmt.Println("main:", mainName)
-	fmt.Println("tail:", flag.Args())
+	fmt.Println("-----    [Template Settings]    -----")
+	fmt.Println("\033[0mName:\t\t\t\033[1m", *name)
+	fmt.Println("\033[0mPlatform:\t\t\033[1m", *platform)
+	fmt.Println("\033[0mMinecraft Version:\t\033[1m", *version)
+	fmt.Println("\033[0mMod ID:\t\t\t\033[1m", id)
+	fmt.Println("\033[0mJava Package:\t\t\033[1m", packageName)
+	fmt.Println("\033[0mJava Main Class:\t\033[1m", mainName)
+	fmt.Println("\033[0m")
+
+	fmt.Print("Confirm creation of new mod template? [Y/n] ")
+
+	reader := bufio.NewReader(os.Stdin)
+	input, err := reader.ReadString('\n')
+	if err != nil {
+		panic(err)
+	}
+
+	input = strings.TrimSpace(strings.ToLower(input))
+
+	if strings.ToLower(input) != "y" {
+		fmt.Println("Aborted. ")
+		return
+	}
+
+	fmt.Println("Please wait...")
 }
