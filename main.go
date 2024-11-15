@@ -137,7 +137,7 @@ func main() {
 		return
 	}
 
-	//templateDir := result["properties"].(map[string]interface{})["templateDir"].(string)
+	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{})["instructions"].([]interface{}), *name, *version, id, packageName, mainName)
 }
 
 func matchesRegex(regex string, input string) bool {
