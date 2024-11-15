@@ -5,6 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"path/filepath"
 	"strings"
 )
 
@@ -25,6 +26,13 @@ func main() {
 	packageName := flag.Args()[1]
 	mainName := flag.Args()[2]
 
+	ex, err := os.Executable()
+	if err != nil {
+		panic(err)
+	}
+
+	expath := filepath.Dir(ex)
+
 	fmt.Println("-----    [Template Settings]    -----")
 	fmt.Println("\033[0mName:\t\t\t\033[1m", *name)
 	fmt.Println("\033[0mPlatform:\t\t\033[1m", *platform)
@@ -32,6 +40,7 @@ func main() {
 	fmt.Println("\033[0mMod ID:\t\t\t\033[1m", id)
 	fmt.Println("\033[0mJava Package:\t\t\033[1m", packageName)
 	fmt.Println("\033[0mJava Main Class:\t\033[1m", mainName)
+	fmt.Println("\033[0mCurrent Path:\t\t\033[1m", expath)
 	fmt.Println("\033[0m")
 
 	fmt.Print("Confirm creation of new mod template? [Y/n] ")
