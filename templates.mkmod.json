@@ -1,0 +1,37 @@
+{
+    "schema": 1,
+    "properties": {
+        "templateDir": ""
+    },
+    
+    "fabric": {
+        "1.21.3": {
+            "instructions": [
+                {"command": "mkdir", "name": "src/main"},
+                {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%/mixin"},
+                {"command": "mkdir", "name": "src/main/resources/assets"},
+                {
+                    "command": "copy",
+                    "files": [
+                        ".gitignore",
+                        "build.gradle",
+                        "gradle.properties",
+                        "gradlew",
+                        "gradlew.bat",
+                        "settings.gradle"
+                    ],
+                    "to": ""
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "resources/fabric.mod.json",
+                        "resources/rename.mod.json"
+                    ],
+                    "to": "src/main/resources"
+                },
+                {"command": "rename", "dir": "src/main/resources", "file": "rename.mod.json", "to": "%mkmod:id%.mod.json"}
+            ]
+        }
+    }
+}

@@ -1,0 +1,35 @@
+{
+	"schemaVersion": 1,
+	"id": "%mkmod:id%",
+	"version": "${version}",
+	"name": "%mkmod:name%",
+	"description": "I'm a fun little description :D",
+	"authors": [
+		"mkmod generator"
+	],
+	"contact": {
+		"homepage": "https://github.com/snackbag/mkmod",
+		"sources": "https://github.com/snackbag/mkmod/blob/main/fabric"
+	},
+	"license": "MIT",
+	"icon": "assets/%mkmod:id%/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"%mkmod:package%.%mkmod:main%"
+		],
+		"fabric-datagen": [
+			"%mkmod:package%.%mkmod:main%DataGenerator"
+		]
+	},
+	"mixins": [
+		"%mkmod:id%.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.16.9",
+		"minecraft": "~%mkmod:version%",
+		"java": ">=21",
+		"fabric-api": "*"
+	},
+	"suggests": {}
+}
