@@ -2,9 +2,12 @@ package main
 
 import (
 	"bufio"
+	"encoding/json"
 	"flag"
 	"fmt"
 	"golang.org/x/text/language"
+	"io"
+	"net/http"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -23,6 +26,7 @@ func main() {
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
 	version := flag.String("version", "1.21.3", "the target minecraft version")
 	name := flag.String("name", "Template Mod", "the mod's name")
+	sources := flag.String("sources", "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main", "The place where mkmod gets its data")
 
 	flag.Parse()
 
@@ -94,7 +98,46 @@ func main() {
 		return
 	}
 
-	fmt.Println("Please wait...")
+	templateurl := *sources + "/templates.mkmod.json"
+	fmt.Printf("Fetching templates at %s\n", templateurl)
+
+	resp, err := http.Get(templateurl)
+	if err != nil {
+		panic(err)
+	}
+
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > 299 {
+		fmt.Println("\033[0;31mCould not receive template file\033[0m")
+		return
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	var result map[string]interface{}
+	if err := json.Unmarshal(body, &result); err != nil {
+		panic(err)
+	}
+
+	schema := int(result["schema"].(float64))
+	if schema != 1 {
+		fmt.Printf("\033[0;31mInvalid schema version: %d, expected 2\033[0m\n", schema)
+		return
+	}
+
+	if _, exists := result[*platform]; !exists {
+		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s, please report this issue\033[0m\n", *platform)
+		return
+	}
+
+	if _, exists := result[*platform].(map[string]interface{})[*version]; !exists {
+		fmt.Printf("\033[0;31mmkmod does not have a template for minecraft %s on %s. If you want to add this version, please create a feature suggestion on the GitHub repository\033[0m\n", *version, *platform)
+		return
+	}
+
+	//templateDir := result["properties"].(map[string]interface{})["templateDir"].(string)
 }
 
 func matchesRegex(regex string, input string) bool {
