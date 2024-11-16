@@ -1,0 +1,27 @@
+name: Cross-Compile for macOS
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Go
+      uses: actions/setup-go@v4
+      with:
+        go-version: 1.23
+
+    - name: Cross-compile for macOS
+      run: |
+        GOOS=darwin GOARCH=amd64 go build -o mkmod-mac64
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: macos-cross-build
+        path: mkmod-mac64
