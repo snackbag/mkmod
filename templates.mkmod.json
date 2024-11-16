@@ -10,6 +10,7 @@
                 {"command": "mkdir", "name": "src/main"},
                 {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%/mixin"},
                 {"command": "mkdir", "name": "src/main/resources/assets"},
+                
                 {
                     "command": "copy",
                     "files": [
@@ -30,7 +31,23 @@
                     ],
                     "to": "src/main/resources"
                 },
-                {"command": "rename", "dir": "src/main/resources", "file": "rename.mixins.json", "to": "%mkmod:id%.mixins.json"}
+                
+                {"command": "rename", "dir": "src/main/resources", "file": "rename.mixins.json", "to": "%mkmod:id%.mixins.json"},
+
+                {
+                    "command": "copy",
+                    "files": [
+                        "java/Main.java",
+                        "java/MainDataGenerator.java"
+                    ],
+                    "to": "src/main/java/%mkmod:package_dir%"
+                },
+                {
+                    "command": "copy", "files": ["java/ExampleMixin.java"], 
+                    "to": "src/main/java/%mkmod:package_dir%/mixin"
+                },
+                {"command": "rename", "dir": "src/main/java/%mkmod:package_dir%", "file": "Main.java", "to": "%mkmod:main%.java"},
+                {"command": "rename", "dir": "src/main/java/%mkmod:package_dir%", "file": "MainDataGenerator.java", "to": "%mkmod:main%DataGenerator.java"}
             ]
         }
     }
