@@ -14,6 +14,7 @@ import (
 	"regexp"
 	"slices"
 	"strings"
+	"time"
 
 	"golang.org/x/text/cases"
 )
@@ -103,6 +104,8 @@ func main() {
 		return
 	}
 
+	startTime := time.Now()
+
 	templateurl := *sources + "/templates.mkmod.json"
 	fmt.Printf("Fetching templates at %s\n", templateurl)
 
@@ -143,6 +146,8 @@ func main() {
 	}
 
 	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{})["instructions"].([]interface{}), ModContext{*platform, *name, *version, id, packageName, mainName, expath, *sources})
+	diff := time.Since(startTime)
+	fmt.Printf("\033[0;32mFinished\033[0m generating mod template in %fs\n", diff.Seconds())
 }
 
 func matchesRegex(regex string, input string) bool {
