@@ -116,7 +116,12 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 }
 
 func rename(dir string, file string, new string, ctx ModContext) {
-	filePath := path.Join(ctx.Executable, ctx.Name, repath(MkmodString(dir, ctx)), MkmodString(file, ctx))
+	new = MkmodString(new, ctx)
+	file = MkmodString(file, ctx)
+
+	basePath := path.Join(ctx.Executable, ctx.Name, repath(MkmodString(dir, ctx)))
+	filePath := path.Join(basePath, file)
+	newPath := path.Join(basePath, new)
 
 	fmt.Printf("rename: %s -> %s\n", filePath, new)
 
@@ -125,4 +130,8 @@ func rename(dir string, file string, new string, ctx ModContext) {
 		return
 	}
 
+	err := os.Rename(filePath, newPath)
+	if err != nil {
+		panic(err)
+	}
 }
