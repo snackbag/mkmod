@@ -60,19 +60,23 @@ func main() {
 		errors = append(errors, "Invalid mod id. May only consist of lowercase characters, numbers, underscore, dot or dash")
 	}
 
-	if len(errors) > 0 {
-		fmt.Println("\033[1mFailed to generate template due to the following errors:\033[0;31m")
-		fmt.Print("* " + strings.Join(errors, "\n* ") + "\n")
-		fmt.Println("\033[0m\nYou must resolve these issues before the template can be created")
-		return
-	}
-
 	ex, err := os.Executable()
 	if err != nil {
 		panic(err)
 	}
 
 	expath := filepath.Dir(ex)
+
+	if _, err := os.Stat(path.Join(expath, *name)); err == nil {
+		errors = append(errors, fmt.Sprintf("There is already a file named '%s' in this directory", *name))
+	}
+
+	if len(errors) > 0 {
+		fmt.Println("\033[1mFailed to generate template due to the following errors:\033[0;31m")
+		fmt.Print("* " + strings.Join(errors, "\n* ") + "\n")
+		fmt.Println("\033[0m\nYou must resolve these issues before the template can be created")
+		return
+	}
 
 	fmt.Println("-----    [Template Settings]    -----")
 	fmt.Println("\033[0mName:\t\t\t\033[1m", *name)
@@ -96,11 +100,6 @@ func main() {
 
 	if strings.ToLower(input) != "y" {
 		fmt.Println("Aborted. ")
-		return
-	}
-
-	if _, err := os.Stat(path.Join(expath, *name)); err == nil {
-		fmt.Printf("\033[0;31mThere is already a file named '%s' in this directory.\033[0m\n", *name)
 		return
 	}
 
