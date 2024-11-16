@@ -79,6 +79,7 @@ func mkdir(dir string, ctx ModContext) {
 
 func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 	files := interfaceToString(rawFiles)
+	to = MkmodString(to, ctx)
 
 	for _, file := range files {
 		base := path.Base(file)
