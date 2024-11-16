@@ -5,7 +5,6 @@ import (
 	"encoding/json"
 	"flag"
 	"fmt"
-	"golang.org/x/text/language"
 	"io"
 	"net/http"
 	"os"
@@ -15,8 +14,6 @@ import (
 	"slices"
 	"strings"
 	"time"
-
-	"golang.org/x/text/cases"
 )
 
 var validPlatforms []string
@@ -43,7 +40,7 @@ func main() {
 
 	id := flag.Args()[0]
 	packageName := flag.Args()[1]
-	mainName := cases.Title(language.English, cases.Compact).String(flag.Args()[2])
+	mainName := strings.ToUpper(flag.Args()[2][:1]) + flag.Args()[2][1:]
 
 	packageMatch := matchesRegex("^(?:\\w+|\\w+\\.\\w+)+$", packageName)
 	mainMatch := matchesRegex("^[a-zA-Z_$]+$", mainName)
