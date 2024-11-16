@@ -105,7 +105,7 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 
 	for _, file := range files {
 		base := path.Base(file)
-		filePath := path.Join(ctx.Executable, ctx.Name, repath(to), base)
+		filePath := path.Join(ctx.Name, repath(to), base)
 		out, err := os.Create(filePath)
 
 		if err != nil {
@@ -142,7 +142,7 @@ func rename(dir string, file string, new string, ctx ModContext) {
 	new = MkmodString(new, ctx)
 	file = MkmodString(file, ctx)
 
-	basePath := path.Join(ctx.Executable, ctx.Name, repath(MkmodString(dir, ctx)))
+	basePath := path.Join(ctx.Name, repath(MkmodString(dir, ctx)))
 	filePath := path.Join(basePath, file)
 	newPath := path.Join(basePath, new)
 
