@@ -124,6 +124,12 @@ func main() {
 		return
 	}
 
+	CreateMod(result, platform, version, name, id, packageName, mainName, expath, sources, make(map[string]string))
+	diff := time.Since(startTime)
+	fmt.Printf("\033[0;32mFinished\033[0m generating mod template in %fs\n", diff.Seconds())
+}
+
+func CreateMod(result map[string]interface{}, platform *string, version *string, name *string, id string, packageName string, mainName string, expath string, sources *string, variables map[string]string) {
 	if _, exists := result[*platform]; !exists {
 		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s'. If you believe this should be added, please create a feature request on the issue tracker\033[0m\n", *platform)
 		return
@@ -134,9 +140,7 @@ func main() {
 		return
 	}
 
-	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{})["instructions"].([]interface{}), ModContext{*platform, *name, *version, id, packageName, mainName, expath, *sources})
-	diff := time.Since(startTime)
-	fmt.Printf("\033[0;32mFinished\033[0m generating mod template in %fs\n", diff.Seconds())
+	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{}), result, ModContext{*platform, *name, *version, id, packageName, mainName, expath, *sources, variables})
 }
 
 func matchesRegex(regex string, input string) bool {

@@ -18,9 +18,29 @@ type ModContext struct {
 	MainClass   string
 	Executable  string
 	SourcesURL  string
+	Variables   map[string]string
 }
 
-func Mkmod(instructions []interface{}, ctx ModContext) {
+func Mkmod(data map[string]interface{}, result map[string]interface{}, ctx ModContext) {
+	if val2, ok := data["variables"]; ok {
+		val2 := val2.(map[string]interface{})
+
+		for k, v := range val2 {
+			if _, found := ctx.Variables[k]; !found {
+				ctx.Variables[k] = fmt.Sprintf("%v", v)
+			}
+		}
+	}
+
+	if val, ok := data["extend"]; ok {
+		val := val.(string)
+		CreateMod(result, &ctx.Platform, &val, &ctx.Name, ctx.ID, ctx.PackageName, ctx.MainClass, ctx.Executable, &ctx.SourcesURL, ctx.Variables)
+		return
+	}
+
+	instructions := data["instructions"].([]interface{})
+	fmt.Println(ctx.Variables)
+
 	for _, element := range instructions {
 		element := element.(map[string]interface{})
 		command := element["command"]
@@ -28,14 +48,12 @@ func Mkmod(instructions []interface{}, ctx ModContext) {
 		switch command {
 		case "mkdir":
 			mkdir(element["name"].(string), ctx)
-			break
 		case "copy":
 			copyFiles(element["files"].([]interface{}), element["to"].(string), ctx)
 		case "rename":
 			rename(element["dir"].(string), element["file"].(string), element["to"].(string), ctx)
 		default:
 			fmt.Printf("\033[0;31mUnknown command: %s\033[0m\n", command)
-			break
 		}
 	}
 }
@@ -48,6 +66,11 @@ func MkmodString(original string, ctx ModContext) string {
 	newVersion = strings.Replace(newVersion, "%mkmod:package%", ctx.PackageName, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:package_dir%", strings.Replace(ctx.PackageName, ".", string(os.PathSeparator), -1), -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:main%", ctx.MainClass, -1)
+
+	for k, v := range ctx.Variables {
+		placeholder := fmt.Sprintf("%%mkmod:%s%%", k)
+		newVersion = strings.ReplaceAll(newVersion, placeholder, v)
+	}
 
 	return newVersion
 }
