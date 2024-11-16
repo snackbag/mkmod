@@ -10,7 +10,8 @@
             "variables": {
                 "javaVersion": "17",
                 "yarn": "build.10",
-                "fabricApi": "0.92.2"
+                "fabricApi": "0.92.2",
+                "version": "1.20.1"
             }
         },
         "1.21.3": {
