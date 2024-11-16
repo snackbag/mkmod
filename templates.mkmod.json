@@ -5,6 +5,15 @@
     },
     
     "fabric": {
+        "1.20": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "17",
+                "yarn": "build.1",
+                "fabricApi": "0.83.0",
+                "version": "1.20"
+            }
+        },
         "1.20.1": {
             "extend": "1.21.3",
             "variables": {
@@ -12,6 +21,78 @@
                 "yarn": "build.10",
                 "fabricApi": "0.92.2",
                 "version": "1.20.1"
+            }
+        },
+        "1.20.2": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "17",
+                "yarn": "build.4",
+                "fabricApi": "0.91.6",
+                "version": "1.20.2"
+            }
+        },
+        "1.20.3": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "17",
+                "yarn": "build.1",
+                "fabricApi": "0.91.1",
+                "version": "1.20.3"
+            }
+        },
+        "1.20.4": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "17",
+                "yarn": "build.3",
+                "fabricApi": "0.97.2",
+                "version": "1.20.4"
+            }
+        },
+        "1.20.5": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.1",
+                "fabricApi": "0.97.8",
+                "version": "1.20.5"
+            }
+        },
+        "1.20.6": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.3",
+                "fabricApi": "0.100.8",
+                "version": "1.20.6"
+            }
+        },
+        "1.21": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.9",
+                "fabricApi": "0.102.0",
+                "version": "1.21"
+            }
+        },
+        "1.21.1": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.3",
+                "fabricApi": "0.108.0",
+                "version": "1.21.1"
+            }
+        },
+        "1.21.2": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.1",
+                "fabricApi": "0.106.1",
+                "version": "1.21.2"
             }
         },
         "1.21.3": {
