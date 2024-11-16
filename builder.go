@@ -33,6 +33,8 @@ func Mkmod(
 			break
 		case "copy":
 			copyFiles(element["files"].([]interface{}), element["to"].(string), ctx)
+		case "rename":
+			rename(element["dir"].(string), element["file"].(string), element["to"].(string), ctx)
 		default:
 			fmt.Printf("\033[0;31mUnknown command: %s\033[0m\n", command)
 			break
