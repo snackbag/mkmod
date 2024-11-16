@@ -15,7 +15,10 @@ import (
 	"time"
 )
 
+var AppVersion string
+
 func main() {
+	AppVersion = "1.0.0"
 	errors := make([]string, 0)
 
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
@@ -24,6 +27,11 @@ func main() {
 	sources := flag.String("sources", "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main", "The place where mkmod gets its data")
 
 	flag.Parse()
+
+	if len(flag.Args()) == 0 {
+		fmt.Printf("mkmod version %s - use mkmod -help for help\n", AppVersion)
+		return
+	}
 
 	if len(flag.Args()) != 3 {
 		fmt.Println("Invalid Syntax. Use mkmod -platform [platform] -version [mc version] -name [mod name] [mod id] [package] [main class]")
