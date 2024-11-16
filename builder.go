@@ -86,7 +86,12 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 
 		fmt.Printf("create: %s\n", filePath)
 
-		resp, err := http.Get(ctx.SourcesURL + fmt.Sprintf("/%s/%s/files/%s", ctx.Platform, ctx.Version, file))
+		resp, err := http.Get(ctx.SourcesURL + fmt.Sprintf("/%s/%s/files/%s", ctx.Platform, ctx.Version, MkmodString(file, ctx)))
+		if err != nil {
+			panic(err)
+		}
+
+		rawBody, err := io.ReadAll(resp.Body)
 		if err != nil {
 			panic(err)
 		}
@@ -96,14 +101,9 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 			return
 		}
 
-		rawBody, err := io.ReadAll(resp.Body)
-		if err != nil {
-			panic(err)
-		}
-
 		body := string(rawBody)
 
-		out.WriteString(body)
+		out.WriteString(MkmodString(body, ctx))
 
 		out.Close()
 		resp.Body.Close()
