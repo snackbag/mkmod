@@ -26,9 +26,9 @@
 		"%mkmod:id%.mixins.json"
 	],
 	"depends": {
-		"fabricloader": ">=0.16.9",
+		"fabricloader": ">=%mkmod:loader%",
 		"minecraft": "~%mkmod:version%",
-		"java": ">=21",
+		"java": ">=%mkmod:javaVersion%",
 		"fabric-api": "*"
 	},
 	"suggests": {}
