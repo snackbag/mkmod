@@ -142,7 +142,7 @@ func main() {
 		return
 	}
 
-	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{})["instructions"].([]interface{}), ModContext{*platform, *name, *version, id, packageName, mainName, expath})
+	Mkmod(result[*platform].(map[string]interface{})[*version].(map[string]interface{})["instructions"].([]interface{}), ModContext{*platform, *name, *version, id, packageName, mainName, expath, *sources})
 }
 
 func matchesRegex(regex string, input string) bool {

@@ -15,6 +15,7 @@ type ModContext struct {
 	PackageName string
 	MainClass   string
 	Executable  string
+	SourcesURL  string
 }
 
 func Mkmod(
