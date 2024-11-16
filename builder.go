@@ -69,7 +69,7 @@ func interfaceToString(original []interface{}) []string {
 
 func mkdir(dir string, ctx ModContext) {
 	dir = MkmodString(path.Join(ctx.Name, repath(dir)), ctx)
-	fmt.Printf("create dir: %s\n")
+	fmt.Printf("create dir: %s\n", dir)
 
 	err := os.MkdirAll(dir, 0755)
 	if err != nil {
