@@ -61,8 +61,31 @@ func interfaceToString(original []interface{}) []string {
 }
 
 func mkdir(dir string, ctx ModContext) {
-	err := os.MkdirAll(MkmodString(path.Join(strings.Replace(ctx.Name, "/", string(os.PathSeparator), -1), dir), ctx), 0755)
+	err := os.MkdirAll(MkmodString(path.Join(ctx.Name, repath(dir)), ctx), 0755)
 	if err != nil {
 		panic(err)
+	}
+}
+
+func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
+	files := interfaceToString(rawFiles)
+
+	for _, file := range files {
+		base := path.Base(file)
+
+		out, err := os.Create(path.Join(ctx.Executable, ctx.Name, base))
+
+		if err != nil {
+			panic(err)
+		}
+
+		fmt.Println(file, base)
+
+		//resp, err := http.Get("")
+		//
+		//out.WriteString(split)
+
+		out.Close()
+		//resp.Body.Close()
 	}
 }
