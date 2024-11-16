@@ -9,6 +9,7 @@ import (
 	"io"
 	"net/http"
 	"os"
+	"path"
 	"path/filepath"
 	"regexp"
 	"slices"
@@ -95,6 +96,11 @@ func main() {
 
 	if strings.ToLower(input) != "y" {
 		fmt.Println("Aborted. ")
+		return
+	}
+
+	if _, err := os.Stat(path.Join(expath, *name)); err == nil {
+		fmt.Printf("\033[0;31mThere is already a file named '%s' in this directory.\033[0m\n", *name)
 		return
 	}
 
