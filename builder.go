@@ -28,6 +28,8 @@ func Mkmod(
 		case "mkdir":
 			mkdir(element["name"].(string), ctx)
 			break
+		case "copy":
+			copyFiles(element["files"].([]interface{}), element["to"].(string), ctx)
 		default:
 			fmt.Printf("\033[0;31mUnknown command: %s\033[0m\n", command)
 			break
