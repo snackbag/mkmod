@@ -30,7 +30,7 @@
                     ],
                     "to": "src/main/resources"
                 },
-                {"command": "rename", "dir": "src/main/resources", "file": "rename.mod.json", "to": "%mkmod:id%.mod.json"}
+                {"command": "rename", "dir": "src/main/resources", "file": "rename.mixins.json", "to": "%mkmod:id%.mod.json"}
             ]
         }
     }
