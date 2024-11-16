@@ -47,6 +47,19 @@ func MkmodString(original string, ctx ModContext) string {
 	return newVersion
 }
 
+func repath(original string) string {
+	return strings.Replace(original, "/", string(os.PathSeparator), -1)
+}
+
+func interfaceToString(original []interface{}) []string {
+	str := make([]string, len(original))
+	for i, val := range original {
+		str[i] = val.(string)
+	}
+
+	return str
+}
+
 func mkdir(dir string, ctx ModContext) {
 	err := os.MkdirAll(MkmodString(path.Join(strings.Replace(ctx.Name, "/", string(os.PathSeparator), -1), dir), ctx), 0755)
 	if err != nil {
