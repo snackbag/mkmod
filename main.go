@@ -125,12 +125,12 @@ func main() {
 	}
 
 	if _, exists := result[*platform]; !exists {
-		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s', please report this issue\033[0m\n", *platform)
+		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s'. If you believe this should be added, please create a feature request on the issue tracker\033[0m\n", *platform)
 		return
 	}
 
 	if _, exists := result[*platform].(map[string]interface{})[*version]; !exists {
-		fmt.Printf("\033[0;31mmkmod does not have a template for minecraft %s on %s. If you want to add this version, please create a feature suggestion on the GitHub repository\033[0m\n", *version, *platform)
+		fmt.Printf("\033[0;31mmkmod does not have a template for minecraft %s on %s. If you want to add this version, please create a feature suggestion on the issue tracker\033[0m\n", *version, *platform)
 		return
 	}
 
