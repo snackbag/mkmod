@@ -11,15 +11,11 @@ import (
 	"path"
 	"path/filepath"
 	"regexp"
-	"slices"
 	"strings"
 	"time"
 )
 
-var validPlatforms []string
-
 func main() {
-	validPlatforms = []string{"fabric"}
 	errors := make([]string, 0)
 
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
@@ -32,10 +28,6 @@ func main() {
 	if len(flag.Args()) != 3 {
 		fmt.Println("Invalid Syntax. Use mkmod -platform [platform] -version [mc version] -name [mod name] [mod id] [package] [main class]")
 		return
-	}
-
-	if !slices.Contains(validPlatforms, *platform) {
-		errors = append(errors, "Invalid platform '"+*platform+"'")
 	}
 
 	id := flag.Args()[0]
