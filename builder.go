@@ -60,17 +60,18 @@ func Mkmod(data map[string]interface{}, result map[string]interface{}, ctx ModCo
 
 func MkmodString(original string, ctx ModContext) string {
 	newVersion := strings.Replace(original, "%mkmod:platform%", ctx.Platform, -1)
+
+	for k, v := range ctx.Variables {
+		placeholder := fmt.Sprintf("%%mkmod:%s%%", k)
+		newVersion = strings.ReplaceAll(newVersion, placeholder, v)
+	}
+
 	newVersion = strings.Replace(newVersion, "%mkmod:name%", ctx.Name, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:version%", ctx.Version, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:id%", ctx.ID, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:package%", ctx.PackageName, -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:package_dir%", strings.Replace(ctx.PackageName, ".", string(os.PathSeparator), -1), -1)
 	newVersion = strings.Replace(newVersion, "%mkmod:main%", ctx.MainClass, -1)
-
-	for k, v := range ctx.Variables {
-		placeholder := fmt.Sprintf("%%mkmod:%s%%", k)
-		newVersion = strings.ReplaceAll(newVersion, placeholder, v)
-	}
 
 	return newVersion
 }
