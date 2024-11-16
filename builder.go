@@ -74,14 +74,14 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 
 	for _, file := range files {
 		base := path.Base(file)
-
-		out, err := os.Create(path.Join(ctx.Executable, ctx.Name, repath(to), base))
+		filePath := path.Join(ctx.Executable, ctx.Name, repath(to), base)
+		out, err := os.Create(filePath)
 
 		if err != nil {
 			panic(err)
 		}
 
-		fmt.Println(file, base)
+		fmt.Printf("create: %s\n", filePath)
 
 		//resp, err := http.Get("")
 		//
