@@ -20,9 +20,7 @@ type ModContext struct {
 	SourcesURL  string
 }
 
-func Mkmod(
-	instructions []interface{}, ctx ModContext) {
-
+func Mkmod(instructions []interface{}, ctx ModContext) {
 	for _, element := range instructions {
 		element := element.(map[string]interface{})
 		command := element["command"]
