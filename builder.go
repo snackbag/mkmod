@@ -2,6 +2,8 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"path"
 	"strings"
@@ -84,11 +86,26 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 
 		fmt.Printf("create: %s\n", filePath)
 
-		//resp, err := http.Get("")
-		//
-		//out.WriteString(split)
+		resp, err := http.Get(ctx.SourcesURL + fmt.Sprintf("/%s/%s/files/%s", ctx.Platform, ctx.Version, file))
+		if err != nil {
+			panic(err)
+		}
+
+		if resp.StatusCode < http.StatusOK || resp.StatusCode > 299 {
+			fmt.Printf("\033[0;31mFailed to get file '%s' from copy instruction -- got code %d | Server: %s\033[0m\n", file, resp.StatusCode, resp.Body)
+			return
+		}
+
+		rawBody, err := io.ReadAll(resp.Body)
+		if err != nil {
+			panic(err)
+		}
+
+		body := string(rawBody)
+
+		out.WriteString(body)
 
 		out.Close()
-		//resp.Body.Close()
+		resp.Body.Close()
 	}
 }
