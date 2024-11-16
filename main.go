@@ -125,7 +125,7 @@ func main() {
 	}
 
 	if _, exists := result[*platform]; !exists {
-		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s, please report this issue\033[0m\n", *platform)
+		fmt.Printf("\033[0;31mTemplate meta is missing platform '%s', please report this issue\033[0m\n", *platform)
 		return
 	}
 
