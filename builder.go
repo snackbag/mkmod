@@ -66,7 +66,10 @@ func interfaceToString(original []interface{}) []string {
 }
 
 func mkdir(dir string, ctx ModContext) {
-	err := os.MkdirAll(MkmodString(path.Join(ctx.Name, repath(dir)), ctx), 0755)
+	dir = MkmodString(path.Join(ctx.Name, repath(dir)), ctx)
+	fmt.Printf("create dir: %s\n")
+
+	err := os.MkdirAll(dir, 0755)
 	if err != nil {
 		panic(err)
 	}
@@ -84,7 +87,7 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 			panic(err)
 		}
 
-		fmt.Printf("create: %s\n", filePath)
+		fmt.Printf("create file: %s\n", filePath)
 
 		resp, err := http.Get(ctx.SourcesURL + fmt.Sprintf("/%s/%s/files/%s", ctx.Platform, ctx.Version, MkmodString(file, ctx)))
 		if err != nil {
@@ -108,4 +111,16 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 		out.Close()
 		resp.Body.Close()
 	}
+}
+
+func rename(dir string, file string, new string, ctx ModContext) {
+	filePath := path.Join(ctx.Executable, ctx.Name, repath(MkmodString(dir, ctx)), MkmodString(file, ctx))
+
+	fmt.Printf("rename: %s -> %s\n", filePath, new)
+
+	if _, err := os.Stat(filePath); err != nil {
+		fmt.Printf("\033[0;31mFailed to rename file '%s' from rename instruction -- does not exist\033[0m\n", filePath)
+		return
+	}
+
 }
