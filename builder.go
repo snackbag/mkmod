@@ -75,7 +75,7 @@ func copyFiles(rawFiles []interface{}, to string, ctx ModContext) {
 	for _, file := range files {
 		base := path.Base(file)
 
-		out, err := os.Create(path.Join(ctx.Executable, ctx.Name, base))
+		out, err := os.Create(path.Join(ctx.Executable, ctx.Name, repath(to), base))
 
 		if err != nil {
 			panic(err)
