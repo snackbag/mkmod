@@ -10,7 +10,6 @@ import (
 	"net/http"
 	"os"
 	"path"
-	"path/filepath"
 	"regexp"
 	"strings"
 	"time"
@@ -20,7 +19,7 @@ var AppVersion string
 var UpdateURL string
 
 func main() {
-	AppVersion = "1.1.0"
+	AppVersion = "1.1.1"
 	UpdateURL = "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main/update.json"
 	errors := make([]string, 0)
 
@@ -63,12 +62,10 @@ func main() {
 		errors = append(errors, "Invalid mod id. May only consist of lowercase characters, numbers, underscore, dot or dash")
 	}
 
-	ex, err := os.Getwd()
+	expath, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
-
-	expath := filepath.Dir(ex)
 
 	if _, err := os.Stat(path.Join(expath, *name)); err == nil {
 		errors = append(errors, fmt.Sprintf("There is already a file named '%s' in this directory", *name))
