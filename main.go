@@ -190,6 +190,10 @@ func CheckVersion() {
 	}
 
 	latest := result["latest"].(string)
+	if latest == AppVersion {
+		return
+	}
+
 	fmt.Printf("⚠️ \033[1;33mmkmod %s has been released. \033[0;33mYou are still on %s! Please update, or you might encounter unexpected or UNSAFE behavior!\033[0m\n", latest, AppVersion)
 	fmt.Println("\033[0;33mInstructions -> https://github.com/snackbag/mkmod\033[0m")
 }
