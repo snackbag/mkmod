@@ -18,7 +18,7 @@ import (
 var AppVersion string
 
 func main() {
-	AppVersion = "1.0.0"
+	AppVersion = "1.1.0"
 	errors := make([]string, 0)
 
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
