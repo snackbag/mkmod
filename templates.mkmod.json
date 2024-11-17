@@ -106,6 +106,16 @@
                 {"command": "mkdir", "name": "src/main"},
                 {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%/mixin"},
                 {"command": "mkdir", "name": "src/main/resources/assets"},
+                {"command": "mkdir", "name": "gradle/wrapper"},
+
+                {
+                    "command": "copy", 
+                    "files": [
+                        "gradle/gradle-wrapper.jar", 
+                        "gradle/gradle-wrapper.properties"
+                    ], 
+                    "to": "gradle/wrapper"
+                },
                 
                 {
                     "command": "copy",
