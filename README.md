@@ -4,9 +4,6 @@ mkmod is a command line tool to quickly create mod templates. It is still under 
 
 ## Installation (or updating)
 
-**IMPORTANT:** There is no automatic updater/notifier yet, so please make sure to check you're using the latest version
-when finding any issues.
-***
 | Operating System | Architecture  | Command                                                                                                                     |
 |------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------|
 | macOS            | Intel x86-64  | `sudo curl -L -o /usr/local/bin/mkmod https://snackbag.net/mkmod/latest-macOS-amd64 && sudo chmod a+x /usr/local/bin/mkmod` |
