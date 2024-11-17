@@ -2,7 +2,7 @@
 
 mkmod is a command line tool to quickly create mod templates. It is still under heavy development and does not work yet.
 
-## Installation
+## Installation (or updating)
 
 **IMPORTANT:** There is no automatic updater/notifier yet, so please make sure to check you're using the latest version
 when finding any issues.
