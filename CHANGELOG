@@ -1,4 +1,7 @@
-v1.0.0 -> 1.1.0
+v1.1.0 -> v1.1.1
+- Fixed the "current dir" showing incorrect data
+
+v1.0.0 -> v1.1.0
 - Added an automatic updater
 - Fixed some texts in the README.md
 - Fixed the "current dir" showing where the executable was but not where the cwd was
