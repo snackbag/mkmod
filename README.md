@@ -14,9 +14,6 @@ when finding any issues.
 | Windows          | 64-bit x86-64 | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-amd64.exe && mkmod.exe`                                     |
 | Windows          | 64-bit ARM    | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-arm64.exe && mkmod.exe`                                     |
 
-On macOS, for a 64-bit version run the following command in terminal:\
-`sudo curl -L -o /usr/local/bin/mkmod https://snackbag.net/mkmod/latest-macOS-64 && sudo chmod a+x /usr/local/bin/mkmod`
-
 ## Build it yourself
 
 Use `go build`\
