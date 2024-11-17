@@ -63,7 +63,7 @@ func main() {
 		errors = append(errors, "Invalid mod id. May only consist of lowercase characters, numbers, underscore, dot or dash")
 	}
 
-	ex, err := os.Executable()
+	ex, err := os.Getwd()
 	if err != nil {
 		panic(err)
 	}
