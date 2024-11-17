@@ -6,6 +6,7 @@ import (
 	"flag"
 	"fmt"
 	"io"
+	"log"
 	"net/http"
 	"os"
 	"path"
@@ -16,10 +17,14 @@ import (
 )
 
 var AppVersion string
+var UpdateURL string
 
 func main() {
-	AppVersion = "1.1.0"
+	AppVersion = "1.0.0"
+	UpdateURL = "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main/update.json"
 	errors := make([]string, 0)
+
+	CheckVersion()
 
 	platform := flag.String("platform", "fabric", "the mod's platform (e.g. fabric)")
 	version := flag.String("version", "1.21.3", "the target minecraft version")
@@ -158,4 +163,33 @@ func matchesRegex(regex string, input string) bool {
 	}
 
 	return match
+}
+
+func CheckVersion() {
+	resp, err := http.Get(UpdateURL)
+	if err != nil {
+		fmt.Println("Failed to check for updates")
+		log.Panicln(err)
+		return
+	}
+
+	if resp.StatusCode < http.StatusOK || resp.StatusCode > 299 {
+		fmt.Printf("\033[0;31mCould not receive update file, status code %v\033[0m\n", resp.StatusCode)
+		return
+	}
+
+	body, err := io.ReadAll(resp.Body)
+	if err != nil {
+		panic(err)
+	}
+
+	var result map[string]interface{}
+	if err := json.Unmarshal(body, &result); err != nil {
+		fmt.Println("Failed to unmarshal update json")
+		return
+	}
+
+	latest := result["latest"].(string)
+	fmt.Printf("⚠️ \033[1;33mmkmod %s has been released. \033[0;33mYou are still on %s! Please update, or you might encounter unexpected or UNSAFE behavior!\033[0m\n", latest, AppVersion)
+	fmt.Println("\033[0;33mInstructions -> https://github.com/snackbag/mkmod\033[0m")
 }
