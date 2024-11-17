@@ -11,8 +11,12 @@ when finding any issues.
 |------------------|---------------|-----------------------------------------------------------------------------------------------------------------------------|
 | macOS            | Intel x86-64  | `sudo curl -L -o /usr/local/bin/mkmod https://snackbag.net/mkmod/latest-macOS-amd64 && sudo chmod a+x /usr/local/bin/mkmod` |
 | macOS            | Apple Silicon | `sudo curl -L -o /usr/local/bin/mkmod https://snackbag.net/mkmod/latest-macOS-arm64 && sudo chmod a+x /usr/local/bin/mkmod` |
-| Windows          | 64-bit x86-64 | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-amd64.exe && mkmod.exe`                                     |
-| Windows          | 64-bit ARM    | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-arm64.exe && mkmod.exe`                                     |
+| Windows          | 64-bit x86-64 | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-amd64.exe && move /y mkmod.exe "%windir%\System32"`         |
+| Windows          | 64-bit ARM    | `curl -L -o mkmod.exe https://snackbag.net/mkmod/latest-windows-arm64.exe && move /y mkmod.exe "%windir%\System32"`         |
+
+**De-installation**\
+macOS: `rm -f /usr/local/bin/mkmod`\
+Windows: `del /f /q "%windir%\System32\mkmod.exe"`
 
 ## Build it yourself
 
