@@ -156,5 +156,71 @@
                 {"command": "rename", "dir": "src/main/java/%mkmod:package_dir%", "file": "MainDataGenerator.java", "to": "%mkmod:main%DataGenerator.java"}
             ]
         }
+    },
+    "forge": {
+        "1.20.1": {
+            "variables": {
+                "javaVersion": "17",
+                "yarn": "build.2",
+                "loader": "0.16.9",
+                "fabricApi": "0.108.0"
+            },
+            "instructions": [
+                {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%"},
+                {"command": "mkdir", "name": "src/main/resources/META-INF"},
+                {"command": "mkdir", "name": "gradle/wrapper"},
+
+                {
+                    "command": "copy", 
+                    "files": [
+                        "gradle/gradle-wrapper.jar", 
+                        "gradle/gradle-wrapper.properties"
+                    ], 
+                    "to": "gradle/wrapper"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        ".gitignore",
+                        ".gitattributes",
+                        "build.gradle",
+                        "gradle.properties",
+                        "gradlew",
+                        "gradlew.bat",
+                        "LICENSE.txt",
+                        "settings.gradle"
+                    ],
+                    "to": ""
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "resources/pack.mcmeta"
+                    ],
+                    "to": "src/main/resources"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "java/Config.java",
+                        "java/ExampleMod.java"
+                    ],
+                    "to": "src/main/java/%mkmod:package_dir%"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "resources/META-INF/mods.toml"
+                    ], 
+                    "to": "src/main/resources/META-INF"
+                },
+                {
+                    "command": "rename",
+                    "dir": "src/main/java/%mkmod:package_dir%",
+                    "file": "ExampleMod.java",
+                    "to": "%mkmod:main%.java"
+                }
+            ]
+        }
     }
 }
