@@ -158,6 +158,62 @@
         }
     },
     "forge": {
+        "1.21.3": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "53.0.25"
+            }
+        },
+        "1.21.1": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "52.0.28"
+            }
+        },
+        "1.21": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "51.0.33"
+            }
+        },
+        "1.20.5": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "50.1.23"
+            }
+        },
+        "1.20.4": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "49.1.13"
+            }
+        },
+        "1.20.3": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "49.0.2"
+            }
+        },
+        "1.20.2": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "48.1.0"
+            }
+        },
+        "1.20": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "46.0.14"
+            }
+        },
         "1.20.1": {
             "variables": {
                 "javaVersion": "17",
