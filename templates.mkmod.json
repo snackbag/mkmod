@@ -161,9 +161,7 @@
         "1.20.1": {
             "variables": {
                 "javaVersion": "17",
-                "yarn": "build.2",
-                "loader": "0.16.9",
-                "fabricApi": "0.108.0"
+                "loader": "47.3.12"
             },
             "instructions": [
                 {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%"},
