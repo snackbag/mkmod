@@ -99,7 +99,7 @@
             "variables": {
                 "javaVersion": "21",
                 "yarn": "build.2",
-                "loader": "0.16.9h",
+                "loader": "0.16.9",
                 "fabricApi": "0.108.0"
             },
             "instructions": [
