@@ -156,5 +156,133 @@
                 {"command": "rename", "dir": "src/main/java/%mkmod:package_dir%", "file": "MainDataGenerator.java", "to": "%mkmod:main%DataGenerator.java"}
             ]
         }
+    },
+    "forge": {
+        "1.21.3": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "53.0.25",
+                "version": "1.21.3"
+            }
+        },
+        "1.21.1": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "52.0.28",
+                "version": "1.21.1"
+            }
+        },
+        "1.21": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "51.0.33",
+                "version": "1.21"
+            }
+        },
+        "1.20.5": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "50.1.23",
+                "version": "1.20.5"
+            }
+        },
+        "1.20.4": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "49.1.13",
+                "version": "1.20.4"
+            }
+        },
+        "1.20.3": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "49.0.2",
+                "version": "1.20.3"
+            }
+        },
+        "1.20.2": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "48.1.0",
+                "version": "1.20.2"
+            }
+        },
+        "1.20": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "17",
+                "loader": "46.0.14",
+                "version": "1.20"
+            }
+        },
+        "1.20.1": {
+            "variables": {
+                "javaVersion": "17",
+                "loader": "47.3.12"
+            },
+            "instructions": [
+                {"command": "mkdir", "name": "src/main/java/%mkmod:package_dir%"},
+                {"command": "mkdir", "name": "src/main/resources/META-INF"},
+                {"command": "mkdir", "name": "gradle/wrapper"},
+
+                {
+                    "command": "copy", 
+                    "files": [
+                        "gradle/gradle-wrapper.jar", 
+                        "gradle/gradle-wrapper.properties"
+                    ], 
+                    "to": "gradle/wrapper"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        ".gitignore",
+                        ".gitattributes",
+                        "build.gradle",
+                        "gradle.properties",
+                        "gradlew",
+                        "gradlew.bat",
+                        "LICENSE.txt",
+                        "settings.gradle"
+                    ],
+                    "to": ""
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "resources/pack.mcmeta"
+                    ],
+                    "to": "src/main/resources"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "java/Config.java",
+                        "java/ExampleMod.java"
+                    ],
+                    "to": "src/main/java/%mkmod:package_dir%"
+                },
+                {
+                    "command": "copy",
+                    "files": [
+                        "resources/META-INF/mods.toml"
+                    ], 
+                    "to": "src/main/resources/META-INF"
+                },
+                {
+                    "command": "rename",
+                    "dir": "src/main/java/%mkmod:package_dir%",
+                    "file": "ExampleMod.java",
+                    "to": "%mkmod:main%.java"
+                }
+            ]
+        }
     }
 }
