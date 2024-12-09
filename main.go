@@ -19,7 +19,7 @@ var AppVersion string
 var UpdateURL string
 
 func main() {
-	AppVersion = "1.1.1"
+	AppVersion = "1.1.2"
 	UpdateURL = "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main/update.json"
 	errors := make([]string, 0)
 
