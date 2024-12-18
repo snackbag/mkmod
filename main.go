@@ -19,7 +19,7 @@ var AppVersion string
 var UpdateURL string
 
 func main() {
-	AppVersion = "1.1.1"
+	AppVersion = "1.1.2"
 	UpdateURL = "https://raw.githubusercontent.com/snackbag/mkmod/refs/heads/main/update.json"
 	errors := make([]string, 0)
 
@@ -46,8 +46,8 @@ func main() {
 	packageName := flag.Args()[1]
 	mainName := strings.ToUpper(flag.Args()[2][:1]) + flag.Args()[2][1:]
 
-	packageMatch := matchesRegex("^(?:\\w+|\\w+\\.\\w+)+$", packageName)
-	mainMatch := matchesRegex("^[a-zA-Z_$]+$", mainName)
+	packageMatch := matchesRegex("^([a-z][a-zA-Z0-9_]*)(\\.[a-z][a-zA-Z0-9_]*)*$", packageName)
+	mainMatch := matchesRegex("^[A-Z][a-zA-Z0-9_$]*$", mainName)
 	idMatch := matchesRegex("^[a-z0-9_.-]+$", id)
 
 	if !packageMatch {
