@@ -167,6 +167,14 @@
         }
     },
     "forge": {
+        "1.21.4": {
+            "extend": "1.20.1",
+            "variables": {
+                "javaVersion": "21",
+                "loader": "54.1.2",
+                "version": "1.21.4"
+            }
+        },
         "1.21.3": {
             "extend": "1.20.1",
             "variables": {
