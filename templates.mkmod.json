@@ -194,7 +194,6 @@
                         "gradle.properties",
                         "gradlew",
                         "gradlew.bat",
-                        "LICENSE.txt",
                         "settings.gradle"
                     ],
                     "to": ""
@@ -320,7 +319,6 @@
                         "gradle.properties",
                         "gradlew",
                         "gradlew.bat",
-                        "LICENSE.txt",
                         "settings.gradle"
                     ],
                     "to": ""
