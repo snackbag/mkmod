@@ -46,7 +46,7 @@ Do you want support for any versions or mod loaders? Open a new issue! We'll be 
 - [X] [Fabric](https://fabricmc.net)
 - [ ] [Quilt](https://quiltmc.org/)
 - [ ] [NeoForge](https://neoforged.net/)
-- [ ] [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)
+- [X] [Forge](https://files.minecraftforge.net/net/minecraftforge/forge/)
 
 **Plugin loader support** (planned for the future)
 
@@ -59,10 +59,10 @@ Do you want support for any versions or mod loaders? Open a new issue! We'll be 
 - [ ] [Velocity](https://papermc.io/software/velocity)
 - [ ] [Bungeecord](https://www.spigotmc.org/wiki/bungeecord/)
 
-| Version | Fabric | Quilt    | NeoForge | Forge    |
-|---------|--------|----------|----------|----------|
-| 1.20.x  | ✅ Yes  | ❌ Coming | ❌ Coming | ❌ Coming |
-| 1.21.x  | ✅ Yes  | ❌ Coming | ❌ Coming | ❌ Coming |
+| Version | Fabric | Quilt    | NeoForge | Forge |
+|---------|--------|----------|----------|-------|
+| 1.20.x  | ✅ Yes  | ❌ Coming | ❌ Coming | ✅ Yes |
+| 1.21.x  | ✅ Yes  | ❌ Coming | ❌ Coming | ✅ Yes |
 
 </details>
 
