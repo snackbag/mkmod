@@ -163,7 +163,11 @@ func matchesRegex(regex string, input string) bool {
 }
 
 func CheckVersion() {
-	resp, err := http.Get(UpdateURL)
+	client := &http.Client{
+		Timeout: 5 * time.Second,
+	}
+
+	resp, err := client.Get(UpdateURL)
 	if err != nil {
 		fmt.Println("Failed to check for updates")
 		log.Panicln(err)
