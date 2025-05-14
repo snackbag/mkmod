@@ -6,7 +6,6 @@ import (
 	"flag"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"os"
 	"path"
@@ -166,9 +165,10 @@ func CheckVersion() {
 	resp, err := http.Get(UpdateURL)
 	if err != nil {
 		fmt.Println("Failed to check for updates")
-		log.Panicln(err)
+		fmt.Println(err)
 		return
 	}
+	defer resp.Body.Close()
 
 	if resp.StatusCode < http.StatusOK || resp.StatusCode > 299 {
 		fmt.Printf("\033[0;31mCould not receive update file, status code %v\033[0m\n", resp.StatusCode)
@@ -177,7 +177,8 @@ func CheckVersion() {
 
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		panic(err)
+		fmt.Println("Failed to read update file")
+		return
 	}
 
 	var result map[string]interface{}
