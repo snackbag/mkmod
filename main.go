@@ -165,6 +165,7 @@ func CheckVersion() {
 	resp, err := http.Get(UpdateURL)
 	if err != nil {
 		fmt.Println("Failed to check for updates")
+		fmt.Println(err)
 		return
 	}
 	defer resp.Body.Close()
