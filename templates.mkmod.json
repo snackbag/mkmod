@@ -164,6 +164,15 @@
                 "fabricApi": "0.118.0",
                 "version": "1.21.4"
             }
+        },
+        "1.21.5": {
+            "extend": "1.21.3",
+            "variables": {
+                "javaVersion": "21",
+                "yarn": "build.1",
+                "fabricApi": "0.124.0",
+                "version": "1.21.5"
+            }
         }
     },
     "forge": {
