@@ -28,6 +28,13 @@ the latest Minecraft version.
 Example:\
 `mkmod -name "Example Mod" examplemod me.jxsnack.example ExampleMod`
 
+**With extensions**\
+If you want to add an extension, for example the Create Addon template extension, you can use the `-extension`
+parameter.
+
+Example:\
+`mkmod -name "Example Mod" -extension "create-addon" examplemod me.jxsnack.example ExampleMod`
+
 ---
 
 If you want to change platform or version, first make sure mkmod supports it. If it doesn't, but you want it to support
