@@ -16,7 +16,7 @@ done
 echo "Building Linux..."
 for ARCH in "${ARCHS_LINUX[@]}"; do
   echo "Building for linux/$ARCH..."
-  GOOS=linux GOARCH=$ARCH go build -o "target/latest-linux-$ARCH.exe"
+  GOOS=linux GOARCH=$ARCH go build -o "target/latest-linux-$ARCH"
 done
 
 echo "Building Windows..."
